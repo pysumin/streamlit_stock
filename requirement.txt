@@ -1,7 +1,0 @@
-pykrx
-datetime
-pandas
-numpy
-streamlit
-matplotlib
-time
