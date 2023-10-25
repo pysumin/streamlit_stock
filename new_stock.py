@@ -1,11 +1,13 @@
 # import FinanceDataReader as fdr
-from pykrx import stock
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
 import time
+from pykrx
+from pykrx import stock
+
 
 def get_db(peri) :
     day1 = (datetime.today()-timedelta(peri)).strftime('%Y%m%d') # 시작일
