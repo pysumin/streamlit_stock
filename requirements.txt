@@ -1,4 +1,3 @@
-pykrx
 datetime
 pandas
 numpy
