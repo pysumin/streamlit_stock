@@ -1,13 +1,10 @@
-
-# from pykrx import stock
+from pykrx import stock
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
 import streamlit as st
-# import pykrx
 import matplotlib.pyplot as plt
 import time
-
 
 def get_db(peri) :
     day1 = (datetime.today()-timedelta(peri)).strftime('%Y%m%d') # 시작일
@@ -30,3 +27,31 @@ def get_table(peri1, peri2):
 
 peri1 = st.sidebar.number_input('단기 일수')
 peri2 = st.sidebar.number_input('장기 일수')
+
+if peri1>0 and peri2 > 0 :
+    db = get_table (peri1, peri2)
+    day1 = (datetime.today()-timedelta(peri2)).strftime('%Y%m%d') # 시작일
+    day2 = datetime.today().strftime('%Y%m%d')                    # 오늘
+    db1 = db.loc[ (db.volume_change>1.5) & (db.등락률2<-30) & (db.등락률1<0) ]
+
+    hei =2
+    fig, axs = plt.subplots(len(db1), 1, figsize=(7,hei*len(db1)))
+
+    for i,tk in enumerate(db1.index[:]):
+        df = stock.get_market_ohlcv_by_date(day1, day2, tk)
+        axs[i].plot( np.arange(len(df)), df.종가, color= 'k')
+        axs[i].plot( np.arange(len(df)), df.종가.rolling(window=5).mean(), color= 'r')
+        axs[i].set_xticklabels([])
+        ax2 = axs[i].twinx()
+        ax2.bar(np.arange(len(df)),df.거래량, color= 'k', alpha = 0.3)
+        ax2.bar(np.arange(len(df)),df.거래량.rolling(window=5).mean(), color= 'r', alpha = 0.3)
+        ax2.set_xticklabels([])
+        axs[i].set_title(db1.loc[tk].종목명1)
+        
+        time.sleep(2)
+
+    fig.set_tight_layout(1)
+
+    st.text('후보 종목 개수 : '+ str( len(db1)))
+
+    st.pyplot(fig)
