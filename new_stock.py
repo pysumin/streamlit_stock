@@ -1,5 +1,6 @@
 # import FinanceDataReader as fdr
 from datetime import datetime, timedelta
+from pykrx import stock
 import pandas as pd
 import numpy as np
 import streamlit as st
