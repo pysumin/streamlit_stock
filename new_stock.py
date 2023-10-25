@@ -1,4 +1,5 @@
-from pykrx import stock
+import pykrx
+# from pykrx import stock
 from datetime import datetime, timedelta
 import pandas as pd
 import numpy as np
