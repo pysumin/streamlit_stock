@@ -25,8 +25,8 @@ def get_table(peri1, peri2):
 
 # peri1, peri2 = 30, 180
 
-peri1 = st.sidebar.number_input('단기 일수')
-peri2 = st.sidebar.number_input('장기 일수')
+peri1 = st.sidebar.number_input('단기 일수', value = 50, step = 10)
+peri2 = st.sidebar.number_input('장기 일수', value = 500, step = 50)
 
 if peri1>0 and peri2 > 0 :
     db = get_table (peri1, peri2)
