@@ -52,6 +52,6 @@ if peri1>0 and peri2 > 0 :
 
     fig.set_tight_layout(1)
 
-    st.text('후보 종목 개수 : '+ str( len(db1)))
+    st.text('후보 종목 개수: '+ str( len(db1)))
 
     st.pyplot(fig)
